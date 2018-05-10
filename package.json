@@ -272,5 +272,5 @@
     "test-android-setup": "docker pull containership/android-base:latest",
     "test-android-unit": "npm run test-android-build && npm run test-android-run-unit"
   },
-  "version": "0.51.1-0"
+  "version": "0.51.1-1"
 }
