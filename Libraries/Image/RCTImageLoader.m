@@ -57,7 +57,7 @@ RCT_EXPORT_MODULE()
 - (void)setUp
 {
     // Set defaults
-    _maxConcurrentLoadingTasks = _maxConcurrentLoadingTasks ?: 4;
+    _maxConcurrentLoadingTasks = _maxConcurrentLoadingTasks ?: 8;
     _maxConcurrentDecodingTasks = _maxConcurrentDecodingTasks ?: 2;
     _maxConcurrentDecodingBytes = _maxConcurrentDecodingBytes ?: 30 * 1024 * 1024; // 30MB
 
