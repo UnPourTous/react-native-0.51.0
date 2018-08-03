@@ -770,23 +770,23 @@ static UIImage *RCTResizeImageIfNeeded(UIImage *image,
     // but we'd have to run the logic both in RCTPhotoLibraryImageLoader and
     // RCTAssetsLibraryRequestHandler. Once we drop iOS7 though, we'd drop
     // RCTAssetsLibraryRequestHandler and can move it there.
-    static NSRegularExpression *videoRegex = nil;
-    if (!videoRegex) {
-      NSError *error = nil;
-      videoRegex = [NSRegularExpression regularExpressionWithPattern:@"(?:&|^)ext=MOV(?:&|$)"
-                                                             options:NSRegularExpressionCaseInsensitive
-                                                               error:&error];
-      if (error) {
-        RCTLogError(@"%@", error);
-      }
-    }
-
-    NSString *query = requestURL.query;
-    if (query != nil && [videoRegex firstMatchInString:query
-                                               options:0
-                                                 range:NSMakeRange(0, query.length)]) {
-      return NO;
-    }
+//    static NSRegularExpression *videoRegex = nil;
+//    if (!videoRegex) {
+//      NSError *error = nil;
+//      videoRegex = [NSRegularExpression regularExpressionWithPattern:@"(?:&|^)ext=MOV(?:&|$)"
+//                                                             options:NSRegularExpressionCaseInsensitive
+//                                                               error:&error];
+//      if (error) {
+//        RCTLogError(@"%@", error);
+//      }
+//    }
+//
+//    NSString *query = requestURL.query;
+//    if (query != nil && [videoRegex firstMatchInString:query
+//                                               options:0
+//                                                 range:NSMakeRange(0, query.length)]) {
+//      return NO;
+//    }
 
     for (id<RCTImageURLLoader> loader in _loaders) {
         // Don't use RCTImageURLLoader protocol for modules that already conform to
