@@ -135,7 +135,7 @@ shouldStartLoadForRequest:(NSMutableDictionary<NSString *, id> *)request
   callback(request);
 
   // Block the main thread for a maximum of 250ms until the JS thread returns
-  if ([_shouldStartLoadLock lockWhenCondition:0 beforeDate:[NSDate dateWithTimeIntervalSinceNow:.25]]) {
+  if ([_shouldStartLoadLock lockWhenCondition:0 beforeDate:[NSDate dateWithTimeIntervalSinceNow:.35]]) {
     BOOL returnValue = _shouldStartLoad;
     [_shouldStartLoadLock unlock];
     _shouldStartLoadLock = nil;
