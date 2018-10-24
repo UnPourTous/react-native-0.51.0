@@ -15,6 +15,8 @@ LOCAL_SRC_FILES := \
   JSLogging.cpp \
   JniJSModulesUnbundle.cpp \
 	JniRAMBundleRegistry.cpp \
+  JSUnBundleSdCardBundle.cpp \
+  JSUnBundleSdCardRegistry.cpp \
   MethodInvoker.cpp \
   ModuleRegistryBuilder.cpp \
   NativeArray.cpp \

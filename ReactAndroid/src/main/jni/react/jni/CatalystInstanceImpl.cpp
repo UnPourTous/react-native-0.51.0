@@ -14,6 +14,8 @@
 #include <cxxreact/RecoverableError.h>
 #include <cxxreact/ModuleRegistry.h>
 #include <cxxreact/RAMBundleRegistry.h>
+#include "JSUnBundleSdCardBundle.h"
+#include "JSUnBundleSdCardRegistry.h"
 #include <fb/log.h>
 #include <folly/dynamic.h>
 #include <folly/Memory.h>
@@ -225,12 +227,29 @@ void CatalystInstanceImpl::jniLoadScriptFromFile(const std::string& fileName,
       sourceURL,
       loadSynchronously);
   } else {
-    std::unique_ptr<const JSBigFileString> script;
-    RecoverableError::runRethrowingAsRecoverable<std::system_error>(
-      [&fileName, &script]() {
-        script = JSBigFileString::fromPath(fileName);
-      });
-    instance_->loadScriptFromString(std::move(script), sourceURL, loadSynchronously);
+
+    if (JSUnBundleSdCardBundle::isUnbundle(sourceURL)) {
+      auto bundle = JSUnBundleSdCardBundle::fromEntryFile(sourceURL);
+      auto registry = folly::make_unique<JSUnBundleSdCardRegistry>(std::move(bundle), sourceURL);
+      std::unique_ptr<const JSBigFileString> script;
+      RecoverableError::runRethrowingAsRecoverable<std::system_error>(
+        [&fileName, &script]() {
+          script = JSBigFileString::fromPath(fileName);
+        });
+      instance_->loadRAMBundle(
+        std::move(registry),
+        std::move(script),
+        sourceURL,
+        loadSynchronously);
+      return;
+    } else {
+      std::unique_ptr<const JSBigFileString> script;
+      RecoverableError::runRethrowingAsRecoverable<std::system_error>(
+        [&fileName, &script]() {
+          script = JSBigFileString::fromPath(fileName);
+        });
+      instance_->loadScriptFromString(std::move(script), sourceURL, loadSynchronously);
+    }
   }
 }
 
