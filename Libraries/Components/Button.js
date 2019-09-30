@@ -118,6 +118,7 @@ class Button extends React.Component<{
       textStyles.push(styles.textDisabled);
       accessibilityTraits.push('disabled');
     }
+    const accessibilityComponentType = accessibilityTraits;
     invariant(
       typeof title === 'string',
       'The title prop of a Button must be a string',
@@ -126,7 +127,7 @@ class Button extends React.Component<{
     const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
     return (
       <Touchable
-        accessibilityComponentType="button"
+        accessibilityComponentType={accessibilityComponentType}
         accessibilityLabel={accessibilityLabel}
         accessibilityTraits={accessibilityTraits}
         hasTVPreferredFocus={hasTVPreferredFocus}
