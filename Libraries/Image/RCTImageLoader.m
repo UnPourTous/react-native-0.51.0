@@ -780,7 +780,7 @@ static UIImage *RCTResizeImageIfNeeded(UIImage *image,
 //        RCTLogError(@"%@", error);
 //      }
 //    }
-//
+
 //    NSString *query = requestURL.query;
 //    if (query != nil && [videoRegex firstMatchInString:query
 //                                               options:0

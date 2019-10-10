@@ -227,15 +227,14 @@ void CatalystInstanceImpl::jniLoadScriptFromFile(const std::string& fileName,
       sourceURL,
       loadSynchronously);
   } else {
-
     if (JSUnBundleSdCardBundle::isUnbundle(sourceURL)) {
       auto bundle = JSUnBundleSdCardBundle::fromEntryFile(sourceURL);
       auto registry = folly::make_unique<JSUnBundleSdCardRegistry>(std::move(bundle), sourceURL);
-      std::unique_ptr<const JSBigFileString> script;
-      RecoverableError::runRethrowingAsRecoverable<std::system_error>(
-        [&fileName, &script]() {
-          script = JSBigFileString::fromPath(fileName);
-        });
+    std::unique_ptr<const JSBigFileString> script;
+    RecoverableError::runRethrowingAsRecoverable<std::system_error>(
+      [&fileName, &script]() {
+        script = JSBigFileString::fromPath(fileName);
+      });
       instance_->loadRAMBundle(
         std::move(registry),
         std::move(script),
@@ -248,7 +247,7 @@ void CatalystInstanceImpl::jniLoadScriptFromFile(const std::string& fileName,
         [&fileName, &script]() {
           script = JSBigFileString::fromPath(fileName);
         });
-      instance_->loadScriptFromString(std::move(script), sourceURL, loadSynchronously);
+    instance_->loadScriptFromString(std::move(script), sourceURL, loadSynchronously);
     }
   }
 }

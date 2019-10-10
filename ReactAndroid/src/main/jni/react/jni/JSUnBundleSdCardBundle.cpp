@@ -14,7 +14,6 @@
 #include <folly/Memory.h>
 #include <sys/stat.h>
 
-
 const std::string MAGIC_FILE_NAME = "UNBUNDLE";
 
 namespace facebook {
@@ -45,7 +44,6 @@ bool JSUnBundleSdCardBundle::isUnbundle(const std::string& sourceURL) {
 JSUnBundleSdCardBundle::Module JSUnBundleSdCardBundle::getModule(uint32_t moduleId) const {
   // can be nullptr for default constructor.
   // FBASSERTMSGF(m_assetManager != nullptr, "Unbundle has not been initialized with an asset manager");
-
   std::ostringstream sourceUrlBuilder;
   sourceUrlBuilder << moduleId << ".js";
   auto sourceUrl = sourceUrlBuilder.str();

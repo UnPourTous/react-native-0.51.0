@@ -13,6 +13,7 @@ import java.util.HashSet;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
+import android.os.AsyncTask;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.react.bridge.Arguments;
@@ -143,7 +144,7 @@ public final class AsyncStorageModule
 
         callback.invoke(null, data);
       }
-    }.execute();
+    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
   /**
@@ -210,7 +211,7 @@ public final class AsyncStorageModule
           callback.invoke();
         }
       }
-    }.execute();
+    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
   /**
@@ -261,7 +262,7 @@ public final class AsyncStorageModule
           callback.invoke();
         }
       }
-    }.execute();
+    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
   /**
@@ -324,7 +325,7 @@ public final class AsyncStorageModule
           callback.invoke();
         }
       }
-    }.execute();
+    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
   /**
@@ -347,7 +348,7 @@ public final class AsyncStorageModule
           callback.invoke(AsyncStorageErrorUtil.getError(null, e.getMessage()));
         }
       }
-    }.execute();
+    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
   /**
@@ -381,7 +382,7 @@ public final class AsyncStorageModule
         }
         callback.invoke(null, data);
       }
-    }.execute();
+    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
   /**

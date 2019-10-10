@@ -123,7 +123,7 @@ void RCTFatal(NSError *error)
   _RCTLogNativeInternal(RCTLogLevelFatal, NULL, 0, @"%@", error.localizedDescription);
 
   RCTFatalHandler fatalHandler = RCTGetFatalHandler();
-  if (fatalHandler) {   
+  if (fatalHandler) {
     fatalHandler(error);
   } else {
 #if DEBUG
