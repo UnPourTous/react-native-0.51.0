@@ -174,7 +174,8 @@ function tryInstallAppOnDevice(args, device) {
 
 function tryLaunchAppOnDevice(device, packageNameWithSuffix, packageName, adbPath, mainActivity) {
   try {
-    const adbArgs = ['-s', device, 'shell', 'am', 'start', '-n', packageNameWithSuffix + '/' + packageName + '.' + mainActivity];
+    console.log(device, packageNameWithSuffix, packageName, adbPath, mainActivity)
+    const adbArgs = ['-s', device, 'shell', 'am', 'start', '-n', packageNameWithSuffix + '/' + mainActivity];
     console.log(chalk.bold(
       `Starting the app on ${device} (${adbPath} ${adbArgs.join(' ')})...`
     ));
@@ -244,7 +245,7 @@ function runOnAllDevices(args, cmd, packageNameWithSuffix, packageName, adbPath)
         // If we cannot execute based on adb devices output, fall back to
         // shell am start
         const fallbackAdbArgs = [
-          'shell', 'am', 'start', '-n', packageNameWithSuffix + '/' + packageName + '.MainActivity'
+          'shell', 'am', 'start', '-n', packageNameWithSuffix + '/' + args.mainActivity
         ];
         console.log(chalk.bold(
           `Starting the app (${adbPath} ${fallbackAdbArgs.join(' ')}...`
