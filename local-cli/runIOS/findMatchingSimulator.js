@@ -20,6 +20,7 @@
  * @returns {Object} {udid, name, version}
  */
 function findMatchingSimulator(simulators, simulatorName) {
+  console.log('findMatchingSimulator')
   if (!simulators.devices) {
     return null;
   }
@@ -27,13 +28,19 @@ function findMatchingSimulator(simulators, simulatorName) {
   var match;
   for (let version in devices) {
     // Making sure the version of the simulator is an iOS (Removes Apple Watch, etc)
-    if (version.indexOf('iOS') !== 0) {
+    if (!version.includes('iOS') && !version.includes('tvOS')) {
       continue;
     }
+
     for (let i in devices[version]) {
       let simulator = devices[version][i];
       // Skipping non-available simulator
-      if (simulator.availability !== '(available)') {
+      if (
+        simulator.availability !== '(available)' &&
+        // @ts-ignore verify isAvailable parameter
+        simulator.isAvailable !== 'YES' &&
+        simulator.isAvailable !== true
+      ) {
         continue;
       }
       // If there is a booted simulator, we'll use that as instruments will not boot a second simulator
